@@ -1,0 +1,15 @@
+{
+  "name": "interaction-testers",
+  "version": "1.0.0",
+  "description": "Provides a REST API to execute headless browser tests, which can then be used like uptime checks",
+  "main": "index.js",
+  "scripts": {
+    "start": "casperjs --ignore-ssl-errors=true index.js"
+  },
+  "author": "timwis <tim@timwis.com>",
+  "license": "MIT",
+  "dependencies": {
+    "casperjs": "^1.1.0-beta3",
+    "phantomjs": "^1.9.18"
+  }
+}
