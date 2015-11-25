@@ -4,7 +4,8 @@
   "description": "Provides a REST API to execute headless browser tests, which can then be used like uptime checks",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "set -a; source .env; set +a; $CASPERJS_BIN test --ignore-ssl-errors=true"
   },
   "author": "timwis <tim@timwis.com>",
   "license": "MIT",
