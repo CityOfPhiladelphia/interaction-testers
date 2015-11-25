@@ -5,7 +5,8 @@ require('dotenv').load()
 
 // Load environment variables
 var CASPERJS_BIN = process.env.CASPERJS_BIN
-var PORT = process.env.PORT
+var PORT = process.env.PORT || 8080
+var IP = process.env.IP || '127.0.0.1'
 var TEST_DIR = process.env.TEST_DIR
 if(TEST_DIR.substr(-1) !== '/') TEST_DIR += '/' // ensure trailing slash
 
@@ -36,6 +37,6 @@ fs.readdir(TEST_DIR, function(err, files) {
 	})
 })
 	
-server.listen(PORT, function() {
-	console.log('Listening on', PORT)
+server.listen(PORT, IP, function() {
+	console.log('Listening on %s:%s', IP, PORT)
 })
