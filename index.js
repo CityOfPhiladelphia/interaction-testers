@@ -1,31 +1,41 @@
-var server = require('webserver').create()
-var casper = require('casper').create({
-	onRunComplete: function() {} // don't kill phantomjs after each run
-})
+var fs = require('fs')
+var exec = require('child_process').exec
+var server = require('restify').createServer()
+require('dotenv').load()
 
-var respond = function(res, success) {
-	res.statusCode = success ? 200 : 500
-	res.write(JSON.stringify({success: success}))
-	res.closeGracefully()
-}
+// Load environment variables
+var CASPERJS_BIN = process.env.CASPERJS_BIN
+var PORT = process.env.PORT
+var TEST_DIR = process.env.TEST_DIR
+if(TEST_DIR.substr(-1) !== '/') TEST_DIR += '/' // ensure trailing slash
 
-server.listen(8080, function(req, res) {
-	if(req.method === 'GET' && req.url === '/') {
-		var url = 'https://secure.phila.gov/PaymentCenter/AccountLookup/PaymentLookup.aspx?lookup=10243083-f451-49a3-9041-a3b1e4ae7c91'
-		casper.start(url, function() {
-			this.sendKeys('#ctl00_BodyContentHolder_Manager_CriterionParameter_0_radTxt_text', '011-53560-01234-001')
-			this.click('#ctl00_BodyContentHolder_btnLookUp')
-			this.waitForSelector('#ctl00_BodyContentHolder_btnContinue', function() {
-				if(this.getElementAttribute('#ctl00_BodyContentHolder_btnContinue', 'value') === 'Pay Now') {
-					respond(res, true)
+// Get all files in directory
+fs.readdir(TEST_DIR, function(err, files) {
+	// Create an API resource for each file
+	files.forEach(function(file) {
+		var resource = file.split('.js')[0]
+		server.get('/' + resource, function(req, res, next) {
+			// Execute casperjs command for this file
+			var command = [
+				CASPERJS_BIN,
+				'test',
+				'--no-colors',
+				'--ignore-ssl-errors=true',
+				TEST_DIR + file
+			].join(' ')
+			exec(command, function(err, stdout, stderr) {
+				// If there was an error or a test failed, return a failure; otherwise success
+				if(err || stdout.indexOf('FAIL') !== -1) {
+					res.send(500, {success: false, message: stdout})
 				} else {
-					respond(res, false)
+					res.send(200, {success: true, message: stdout})
 				}
+				next()
 			})
 		})
-		
-		casper.run()
-	}
+	})
 })
-
-console.log('Server running at http://localhost:8080')
+	
+server.listen(PORT, function() {
+	console.log('Listening on', PORT)
+})
