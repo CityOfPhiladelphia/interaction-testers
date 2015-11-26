@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "set -a; source .env; set +a; $CASPERJS_BIN test --ignore-ssl-errors=true"
+    "test": "set -a; . ./.env; set +a; $CASPERJS_BIN test --ignore-ssl-errors=true"
   },
   "author": "timwis <tim@timwis.com>",
   "license": "MIT",
