@@ -1,4 +1,5 @@
 var system = require('system')
+require('../capture')(300)
 
 var ACCOUNT_NUMBER = system.env.ACCOUNT_WATER_COMMERCIAL
 

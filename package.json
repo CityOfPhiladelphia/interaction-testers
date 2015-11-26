@@ -4,8 +4,9 @@
   "description": "Provides a REST API to execute headless browser tests, which can then be used like uptime checks",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "set -a; . ./.env; set +a; $CASPERJS_BIN test --ignore-ssl-errors=true"
+    "server": "node server.js",
+    "test": "set -a; . ./.env; set +a; CAPTURE=true $CASPERJS_BIN test --ignore-ssl-errors=true",
+    "capture": "node ./node_modules/vDe/server.js"
   },
   "author": "timwis <tim@timwis.com>",
   "license": "MIT",
@@ -14,5 +15,8 @@
     "dotenv": "^1.2.0",
     "phantomjs": "^1.9.18",
     "restify": "^4.0.3"
+  },
+  "devDependencies": {
+    "vDe": "github:maciejjankowski/flaming-octo-puss"
   }
 }
