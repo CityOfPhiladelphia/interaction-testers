@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sudo pm2 restart all
+sudo pm2 reload all
