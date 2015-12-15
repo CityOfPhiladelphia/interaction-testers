@@ -22,6 +22,10 @@ output = text
 region = us-east-1
 EOF
 
+echo 'Setting up SSH access'
+openssl aes-256-cbc -K $encrypted_2a29826175cc_key -iv $encrypted_2a29826175cc_iv -in .travis/philagov2.pem.enc -out ~/.ssh/philagov2.pem -d
+chmod 400 ~/.ssh/philagov2.pem
+
 joia host
 joia push
 joia deploy
