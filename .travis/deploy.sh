@@ -32,5 +32,5 @@ openssl aes-256-cbc -K $encrypted_2a29826175cc_key -iv $encrypted_2a29826175cc_i
 chmod 400 ~/.ssh/philagov2.pem
 
 joia host
-joia push
+joia push > /dev/null
 joia deploy
