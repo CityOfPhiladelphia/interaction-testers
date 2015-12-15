@@ -9,6 +9,7 @@ npm install
 
 sudo npm install pm2 -g
 sudo pm2 startup
+sudo pm2 delete all # Sweep old out of the way if we're running again
 sudo -E pm2 start ecosystem.json
 sudo pm2 save
 
