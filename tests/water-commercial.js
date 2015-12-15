@@ -10,6 +10,7 @@ var selectors = {
 }
 
 casper.test.begin('Water - Commercial', function suite(test) {
+  casper.userAgent(system.env.USER_AGENT)
 	casper.start(url, function() {
 		test.assertTitle('Payment Center - City of Philadelphia')
 		this.sendKeys(selectors.accountInput, ACCOUNT_NUMBER)

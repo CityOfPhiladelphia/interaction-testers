@@ -11,6 +11,7 @@ var selectors = {
 }
 
 casper.test.begin('Real Estate Tax', function suite(test) {
+  casper.userAgent(system.env.USER_AGENT)
 	casper.start(url, function() {
 		test.assertTitle('City of Philadelphia | Revenue Department')
 		this.sendKeys(selectors.addressInput, '1234 market')
