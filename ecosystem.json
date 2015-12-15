@@ -1,6 +1,7 @@
 {
   "apps": [{
     "script": "server.js",
-    "instances": 2
+    "instances": 2,
+    "env": process.env
   }]
 }
