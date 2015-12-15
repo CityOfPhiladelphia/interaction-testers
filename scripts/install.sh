@@ -9,8 +9,7 @@ npm install
 
 sudo npm install pm2 -g
 sudo pm2 startup
-cat ecosystem.json | envsubst | sudo tee /etc/pm2.json > /dev/null
-sudo pm2 start /etc/pm2.json
+sudo pm2 start ecosystem.json
 
 sudo cp nginx.conf /etc/nginx/nginx.conf
 sudo service nginx reload
