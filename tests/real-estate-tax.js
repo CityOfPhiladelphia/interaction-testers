@@ -17,7 +17,7 @@ casper.test.begin('Real Estate Tax', function suite(test) {
 		this.sendKeys(selectors.addressInput, '1234 market')
 		this.click(selectors.addressButton)
 		this.waitForSelector(selectors.accountText, function() {
-			test.assertEquals(this.fetchText(selectors.accountText), '883309000', 'Account number matches')
+			test.assertEquals(this.fetchText(selectors.accountText), '883309050', 'Account number matches')
 			this.click(selectors.payBillButton)
 			this.waitForSelector(selectors.payNowButton, function() {
 				test.assertEquals(this.getElementAttribute(selectors.payNowButton, 'value'), 'Pay Now', '"Pay Now" button exists')
