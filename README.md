@@ -12,7 +12,7 @@ Place any sensitive variables in `.env` to omit them from source control.
 Several utilities are provided to easily test these scrapers while developing, since it would be a pain to have
 to run the server each time and request an endpoint in the browser over and over.
 ```bash
-> npm run test tests/test-name.js
+> npm run test -- <test name>
 ```
 Loads the environment variables from `.env` and runs the provided test using `--ignore-ssl-errors=true`
 ```bash
@@ -27,6 +27,6 @@ at the top, as seen in [water-commercial.js](tests/water-commercial.js)
 > npm run server
 ```
 Runs a web server with `GET` paths created for each test, using the name of the file without the file extension.
-For instance, `http://<domain>.com/water-commercial`. 
+For instance, `http://<domain>.com/water-commercial`.
 The request will respond with a status code of `200` if the test passes and `500` if it fails, along with
 the output of the CasperJS test.
