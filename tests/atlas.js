@@ -14,7 +14,8 @@ casper.test.begin('Atlas', function suite(test) {
   // set custom interaction testers user agent
   casper.userAgent(system.env.USER_AGENT);
 
-  casper.start('https://atlas.phila.gov');
+  // casper.start('https://atlas.phila.gov');
+  casper.start('http://atlas.phila.gov.s3-website-us-east-1.amazonaws.com');
 
   // wait for search input to appear
   casper.then(function () {
