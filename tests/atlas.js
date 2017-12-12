@@ -14,12 +14,16 @@ casper.test.begin('Atlas', function suite(test) {
   // set custom interaction testers user agent
   casper.userAgent(system.env.USER_AGENT);
 
-  // casper.start('https://atlas.phila.gov');
-  casper.start('http://atlas.phila.gov.s3-website-us-east-1.amazonaws.com');
+  casper.start('https://atlas.phila.gov');
 
   // wait for search input to appear
   casper.then(function () {
-    casper.waitForSelector(selectors.searchInput, null, null, 20000);
+    casper.waitForSelector(selectors.searchInput, null, function () {
+      var innerHtml = casper.evaluate(function () {
+        return document.documentElement.innerHTML;
+      });
+      console.log(innerHtml);
+    }, 20000);
   });
 
   // search for an address; use a condo address so we get the complete list of
