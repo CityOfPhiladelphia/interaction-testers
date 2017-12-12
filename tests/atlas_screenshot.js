@@ -16,6 +16,10 @@ casper.test.begin('Atlas', function suite(test) {
 
   casper.start('http://atlas.phila.gov.s3-website-us-east-1.amazonaws.com');
 
+	casper.on('page.error', function (msg, trace) {
+		this.echo('Error: ' + msg, 'ERROR');
+	});
+
   // wait for search input to appear
   casper.then(function () {
     test.assertTitle('Atlas | phila.gov')
