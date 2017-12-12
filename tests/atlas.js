@@ -18,7 +18,7 @@ casper.test.begin('Atlas', function suite(test) {
 
   // wait for search input to appear
   casper.then(function () {
-    casper.waitForSelector(selectors.searchInput, null, 10000);
+    casper.waitForSelector(selectors.searchInput, null, null, 10000);
   });
 
   // search for an address; use a condo address so we get the complete list of
