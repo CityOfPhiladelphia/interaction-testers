@@ -20,11 +20,12 @@ casper.test.begin('Atlas', function suite(test) {
   casper.then(function () {
     test.assertTitle('Atlas | phila.gov')
     casper.waitForSelector(selectors.searchInput, null, function () {
+			casper.capture('screenshots/atlas0.png');
       var innerHtml = casper.evaluate(function () {
         return document.documentElement.innerHTML;
       });
       console.log(innerHtml);
-    }, 20000);
+    }, 10000);
   });
 
   // search for an address; use a condo address so we get the complete list of
